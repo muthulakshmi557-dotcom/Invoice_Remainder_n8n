@@ -41,13 +41,13 @@ Future Improvements
 ![Workflow](workflow.png)
 
 ### 2. Invoice Data in Google Sheets
-![Invoice Data](invoice-data.png)
+![Invoice Data](invoice_data.png)
 
 ### 3. Successful Email Reminder
-![Email Preview](email-preview.png)
+![Email Preview](email_preview.png)
 
 ### 4. Workflow Execution Result
-![Execution Result](execution-result.png)
+![Execution Result](execution_result.png)
 
 ## Learning Outcomes
 
