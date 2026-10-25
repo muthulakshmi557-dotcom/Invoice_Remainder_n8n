@@ -1,0 +1,135 @@
+{
+  "name": "Payment  Remainder",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "c480bdec-3e7a-4b3b-9eef-7be235aceac5",
+      "name": "When clicking ‘Execute workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -144,
+        -16
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1xwNJp8uwsaC9kYQfvZFbd8LN_bnDysCAFg7w7CJLNow",
+          "mode": "list",
+          "cachedResultName": "customer data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1xwNJp8uwsaC9kYQfvZFbd8LN_bnDysCAFg7w7CJLNow/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1xwNJp8uwsaC9kYQfvZFbd8LN_bnDysCAFg7w7CJLNow/edit#gid=0"
+        },
+        "options": {}
+      },
+      "id": "2b449f8b-6339-4e3b-921c-20cfb8838b33",
+      "name": "Get row(s) in sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        80,
+        -16
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "0OddtfL4ShFuIT5Y",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const today = new Date().toLocaleDateString(\"en-CA\", {\n  timeZone: \"Asia/Kolkata\"\n});\n\nconst items = $input.all();\n\nconst filteredItems = items.filter(item => {\n  return item.json.due_date === today;\n});\n\nreturn filteredItems;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        304,
+        -16
+      ],
+      "id": "1251cf3b-2bbc-4e81-8479-81e878459d1f",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.customer_email }}",
+        "subject": "Payment Remainder",
+        "emailType": "text",
+        "message": "=Hi {{ $json[\"customer_name\"] }},  \n\nThis is a friendly reminder that your payment is due today ({{ $json[\"due_date\"] }}). Kindly make the payment at your earliest convenience.  \n\nRegards,\nAccounts Team",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        528,
+        -16
+      ],
+      "id": "bf26c5d6-1f69-4562-a0ad-fb8b47cad51b",
+      "name": "Send a message",
+      "webhookId": "fa4b43c2-14cc-4ce4-9877-e42161cf55f4",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "pG7xBkvZCX743olW",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "0c406f20-7dfa-4129-9d59-cc5d3dc7202e",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "2fc4f4037a781c07dfeb991a1f5d89066ed99bcaa16bbe45c7a765f6ff26397b"
+  },
+  "nodeGroups": [],
+  "id": "VM2eeisKF8t86dR6",
+  "tags": []
+}
