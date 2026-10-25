@@ -1,17 +1,17 @@
-Invoice Reminder Automation
+# Invoice Reminder Automation
 
-Overview
+## Overview
 
 An invoice reminder automation workflow built using n8n, Google Sheets, JavaScript, and Gmail. It identifies invoices due today and sends personalized email reminders.
 
-Tech Stack
+## Tech Stack
 
 - n8n — Workflow automation
 - Google Sheets — Invoice data storage
 - JavaScript — Date-based filtering
 - Gmail — Email notifications
 
-Workflow
+## Workflow
 
 1. Start the workflow manually.
 2. Retrieve invoice records from Google Sheets.
@@ -19,7 +19,7 @@ Workflow
 4. Generate a personalized reminder using customer details.
 5. Send the reminder email through Gmail.
 
-Sample Email
+## Sample Email
 
 Hi Customer,
 
@@ -35,10 +35,24 @@ Future Improvements
 - Schedule automatic daily execution.
 - Add overdue payment reminders.
 
-Learning Outcomes
+## Project Screenshots
+
+### 1. n8n Workflow
+![Workflow](workflow.png)
+
+### 2. Invoice Data in Google Sheets
+![Invoice Data](invoice-data.png)
+
+### 3. Successful Email Reminder
+![Email Preview](email-preview.png)
+
+### 4. Workflow Execution Result
+![Execution Result](execution-result.png)
+
+## Learning Outcomes
 
 This project helped me practise workflow automation, Google Sheets integration, JavaScript filtering, and automated email notifications.
 
-Disclaimer
+## Disclaimer
 
 This project was built for learning purposes. All sample invoice records should be fictional, and sensitive information must not be shared publicly.
